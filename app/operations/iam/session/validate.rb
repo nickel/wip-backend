@@ -13,7 +13,7 @@ module Iam
     delegate(*Form.new.attributes.keys, to: :form)
 
     def execute
-      jwt_decode(authorization.split(" ").last)
+      jwt_decode(authorization)
 
       Response.success(true)
     rescue JWT::DecodeError, JWT::VerificationError
