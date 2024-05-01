@@ -29,10 +29,7 @@ module Iam
     def jwt_encode(payload)
       JWT.encode(
         payload,
-        Rails
-          .application
-          .credentials
-          .secret_key_base,
+        Rails.configuration.secret_key_base,
         "HS256"
       )
     end
