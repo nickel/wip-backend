@@ -8,6 +8,7 @@ class Tag < ApplicationRecord
       (tags || "")
         .split(",")
         .map(&:strip)
+        .map(&:downcase)
     else
       tags
     end
