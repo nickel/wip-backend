@@ -33,6 +33,20 @@ module Projects
       assert_equal :inclusion, response.value.data.errors.first.type
     end
 
+    test "tags a project with an array of tags" do
+      response = Project::Create.call(**required_data(tags: %w(foo bar)))
+
+      assert response.success?
+      assert_equal %w(foo bar).sort, response.value.tags.sort
+    end
+
+    test "tags a project with a string of tags" do
+      response = Project::Create.call(**required_data(tags: "foo, bar"))
+
+      assert response.success?
+      assert_equal %w(foo bar).sort, response.value.tags.sort
+    end
+
     private
 
     def required_data(custom = {})
