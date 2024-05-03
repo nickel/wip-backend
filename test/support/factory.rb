@@ -18,4 +18,10 @@ module Factory
                 tags: "note" }.merge(input))
       .value!
   end
+
+  def generate_log(**input)
+    Wip::Logs::Create
+      .call(**{ content: "Lorem ipsum dolor sit amet" }.merge(input))
+      .value!
+  end
 end
