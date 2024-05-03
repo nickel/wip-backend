@@ -2,12 +2,12 @@
 
 require "test_helper"
 
-module Projects
-  class Project::FindAllTest < ActiveSupport::TestCase
+module Wip
+  class Projects::FindAllTest < ActiveSupport::TestCase
     test "find all projects" do
       3.times { Factory.generate_project }
 
-      response = Project::FindAll.call
+      response = Projects::FindAll.call
 
       assert response.success?
 

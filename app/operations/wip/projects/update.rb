@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Projects
-  class Project::Update < CommandHandler::Command
+module Wip
+  class Projects::Update < CommandHandler::Command
     class Form
       include CommandHandler::Form
 
@@ -33,7 +33,7 @@ module Projects
     end
 
     def find_project
-      Project::Find.call(id:)
+      Projects::Find.call(id:)
     end
 
     def create_or_update_tags

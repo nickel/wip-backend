@@ -2,10 +2,10 @@
 
 require "test_helper"
 
-module Projects
-  class Project::CreateTest < ActiveSupport::TestCase
+module Wip
+  class Projects::CreateTest < ActiveSupport::TestCase
     test "creates a project with the proper values" do
-      response = Project::Create.call(**required_data)
+      response = Projects::Create.call(**required_data)
 
       assert response.success?
 
@@ -18,7 +18,7 @@ module Projects
 
     test "creates a project without a required value" do
       required_data.each_key do |key|
-        response = Project::Create.call(**required_data.except(key))
+        response = Projects::Create.call(**required_data.except(key))
 
         assert response.failure?
         assert response.value.data.errors.key?(key)
@@ -26,7 +26,7 @@ module Projects
     end
 
     test "creates a project with a not proper type value" do
-      response = Project::Create.call(**required_data(project_type: "invent"))
+      response = Projects::Create.call(**required_data(project_type: "invent"))
 
       assert response.failure?
       assert response.value.data.errors.key?(:project_type)
@@ -34,14 +34,14 @@ module Projects
     end
 
     test "tags a project with an array of tags" do
-      response = Project::Create.call(**required_data(tags: %w(foo bar)))
+      response = Projects::Create.call(**required_data(tags: %w(foo bar)))
 
       assert response.success?
       assert_equal %w(foo bar).sort, response.value.tags.sort
     end
 
     test "tags a project with a string of tags" do
-      response = Project::Create.call(**required_data(tags: "foo, bar"))
+      response = Projects::Create.call(**required_data(tags: "foo, bar"))
 
       assert response.success?
       assert_equal %w(foo bar).sort, response.value.tags.sort

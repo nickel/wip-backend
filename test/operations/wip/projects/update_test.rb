@@ -2,12 +2,12 @@
 
 require "test_helper"
 
-module Projects
-  class Project::UpdateTest < ActiveSupport::TestCase
+module Wip
+  class Projects::UpdateTest < ActiveSupport::TestCase
     test "updates a project with the proper values" do
       project = Factory.generate_project
 
-      response = Project::Update
+      response = Projects::Update
         .call(
           id: project.id,
           name: "My wonderful project - Updated",
@@ -25,7 +25,7 @@ module Projects
     test "updates tags a project" do
       project = Factory.generate_project(tags: "foo, bar")
 
-      response = Project::Update
+      response = Projects::Update
         .call(
           id: project.id,
           name: "My wonderful project - Updated",

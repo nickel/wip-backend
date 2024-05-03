@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Projects
-  class Project::FindAll < CommandHandler::Command
+module Wip
+  class Projects::FindAll < CommandHandler::Command
     class Form
       include CommandHandler::Form
     end
