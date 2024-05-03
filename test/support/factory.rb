@@ -24,4 +24,12 @@ module Factory
       .call(**{ content: "Lorem ipsum dolor sit amet" }.merge(input))
       .value!
   end
+
+  def generate_bookmark(**input)
+    Wip::Bookmarks::Create
+      .call(**{ title: "My wonderful note",
+                description: "Lorem ipsum dolor sit amet",
+                url: "https://google.es" }.merge(input))
+      .value!
+  end
 end
