@@ -32,4 +32,11 @@ module Factory
                 url: "https://google.es" }.merge(input))
       .value!
   end
+
+  def generate_goal(**input)
+    Wip::Goals::Create
+      .call(**{ title: "My wonderful goal",
+                description: "Lorem ipsum dolor sit amet" }.merge(input))
+      .value!
+  end
 end
