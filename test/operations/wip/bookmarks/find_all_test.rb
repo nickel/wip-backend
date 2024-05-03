@@ -4,7 +4,7 @@ require "test_helper"
 
 module Wip
   class Bookmarks::FindAllTest < ActiveSupport::TestCase
-    test "find all logs" do
+    test "find all bookmarks" do
       3.times { Factory.generate_bookmark }
 
       response = Bookmarks::FindAll.call
