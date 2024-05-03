@@ -10,4 +10,12 @@ module Factory
                 project_type: "service" }.merge(input))
       .value!
   end
+
+  def generate_note(**input)
+    Wip::Notes::Create
+      .call(**{ title: "My wonderful note",
+                content: "Lorem ipsum dolor sit amet",
+                tags: "note" }.merge(input))
+      .value!
+  end
 end

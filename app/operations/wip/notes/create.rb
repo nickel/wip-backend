@@ -1,18 +1,16 @@
 # frozen_string_literal: true
 
 module Wip
-  class Projects::Create < CommandHandler::Command
+  class Notes::Create < CommandHandler::Command
     class Form
       include CommandHandler::Form
 
-      attribute :name, :string
-      attribute :description, :string
-      attribute :project_type, :string
-      attribute :reference_url, :string
+      attribute :title, :string
+      attribute :content, :string
+      attribute :private, :boolean, default: true
       attribute :tags, default: []
 
-      validates :name, :description, :project_type, presence: true
-      validates :project_type, inclusion: { in: Project::TYPES }
+      validates :title, presence: true
 
       def tags=(tags)
         super(Tag.parser(tags))
@@ -24,12 +22,14 @@ module Wip
     def execute
       ActiveRecord::Base.transaction do
         create_tags.and_then do |tags|
-          create_project(tags:).and_then do |project|
-            Response.success(project.to_struct)
+          create_note(tags:).and_then do |note|
+            Response.success(note.to_struct)
           end
         end
       end
     end
+
+    private
 
     def create_tags
       Response.success(
@@ -37,9 +37,9 @@ module Wip
       )
     end
 
-    def create_project(tags:)
-      Project
-        .new(name:, description:, project_type:, reference_url:, tags:)
+    def create_note(tags:)
+      Note
+        .new(title:, content:, private:, tags:)
         .save_with_response
     end
   end
