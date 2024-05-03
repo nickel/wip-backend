@@ -4,7 +4,7 @@ module Factory
   module_function
 
   def generate_project(**input)
-    Projects::Project::Create
+    Wip::Projects::Create
       .call(**{ name: "My wonderful project",
                 description: "Lorem ipsum dolor sit amet",
                 project_type: "service" }.merge(input))

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Projects
-  class Project::Remove < CommandHandler::Command
+module Wip
+  class Projects::Remove < CommandHandler::Command
     class Form
       include CommandHandler::Form
 
@@ -13,7 +13,7 @@ module Projects
     delegate(*Form.new.attributes.keys, to: :form)
 
     def execute
-      Project::Find
+      Projects::Find
         .call(id:)
         .and_then do |project|
           Response.success(
