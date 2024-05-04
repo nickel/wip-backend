@@ -4,10 +4,14 @@ module Api
   module V1
     class SessionsController < ApplicationController
       def create
-        Iam::Session::Create
+        response = Iam::Session::Create
           .call(username: params[:username], password: params[:password])
-          .on_failure { |response| render json: { error: response[:message] }, status: :unauthorized }
-          .and_then   { |response| render json: { token: response[:token] },   status: :ok }
+
+        if response.success?
+          render json: { token: response.value[:token] }, status: :ok
+        else
+          render json: { error: response.value[:message] }, status: :unauthorized
+        end
       end
     end
   end

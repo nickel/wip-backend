@@ -18,6 +18,7 @@ module Wip
       Bookmark
         .new(title:, description:, url:)
         .save_with_response
+        .and_then { |bookmark| Response.success(bookmark.to_struct) }
     end
   end
 end

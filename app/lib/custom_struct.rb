@@ -12,4 +12,8 @@ class CustomStruct < OpenStruct
   def attributes
     instance_variable_get("@table")
   end
+
+  def as_json(options = nil)
+    @table.as_json(options)
+  end
 end
