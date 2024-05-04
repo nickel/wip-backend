@@ -3,6 +3,18 @@
 module Api
   module V1
     class BookmarksControllerTest < ActionDispatch::IntegrationTest
+      test "should list bookmarks" do
+        3.times { Factory.generate_bookmark }
+
+        get api_v1_bookmarks_url
+
+        assert_response :success
+
+        bookmarks = JSON.parse(response.body)["bookmarks"]
+
+        assert_equal 3, bookmarks.length
+      end
+
       test "should create a bookmark" do
         post(api_v1_bookmarks_url, params:, headers:)
 

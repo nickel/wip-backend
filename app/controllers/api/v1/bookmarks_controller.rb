@@ -5,11 +5,17 @@ module Api
     class BookmarksController < ApplicationController
       before_action :authenticate_request!, only: %w(create)
 
+      def index
+        response = Wip::Bookmarks::FindAll.call
+
+        render json: { bookmarks: response.value }, status: :ok
+      end
+
       def create
         response = Wip::Bookmarks::Create.call(**input_data_for_create)
 
         if response.success?
-          render json: response.value.to_h, status: :created
+          render json: response.value, status: :created
         else
           render json: response.value.data.errors, status: :unprocessable_entity
         end
