@@ -25,7 +25,7 @@ module Iam
     def jwt_decode(token)
       JWT.decode(
         token,
-        Rails.configuration.secret_key_base,
+        Rails.application.secret_key_base,
         true,
         { algorithm: "HS256" }
       )[0]
