@@ -14,6 +14,10 @@ Rails.application.routes.draw do
       post "login", to: "sessions#create"
 
       resources :bookmarks
+      resources :goals
+      resources :logs
+      resources :notes
+      resources :projects
     end
   end
 end
