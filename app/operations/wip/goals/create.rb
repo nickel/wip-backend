@@ -17,6 +17,7 @@ module Wip
       Goal
         .new(title:, description:)
         .save_with_response
+        .and_then { |goal| Response.success(goal.to_struct) }
     end
   end
 end
