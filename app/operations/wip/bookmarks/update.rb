@@ -19,6 +19,7 @@ module Wip
       Bookmark
         .find_by(id:)
         .update_with_response(title:, description:, url:)
+        .and_then { |bookmark| Response.success(bookmark.to_struct) }
     end
   end
 end

@@ -15,7 +15,9 @@ module Wip
     delegate(*Form.new.attributes.keys, to: :form)
 
     def call
-      Response.success(find_all)
+      Response.success(
+        find_all.map(&:to_struct)
+      )
     end
 
     private

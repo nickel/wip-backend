@@ -16,6 +16,7 @@ module Wip
       Log
         .new(content:)
         .save_with_response
+        .and_then { |log| Response.success(log.to_struct) }
     end
   end
 end

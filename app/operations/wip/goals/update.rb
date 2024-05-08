@@ -18,6 +18,7 @@ module Wip
       Goal
         .find_by(id:)
         .update_with_response(title:, description:)
+        .and_then { |goal| Response.success(goal.to_struct) }
     end
   end
 end

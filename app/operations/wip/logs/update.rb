@@ -17,6 +17,7 @@ module Wip
       Log
         .find_by(id:)
         .update_with_response(content:)
+        .and_then { |log| Response.success(log.to_struct) }
     end
   end
 end

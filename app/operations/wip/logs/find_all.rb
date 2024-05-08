@@ -3,7 +3,11 @@
 module Wip
   class Logs::FindAll < CommandHandler::Command
     def execute
-      Response.success(Log.all.map(&:to_struct))
+      Response.success(
+        Log
+          .order("created_at DESC")
+          .map(&:to_struct)
+      )
     end
   end
 end
